@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 
 int main(int argc, char const *argv[])
@@ -9,7 +10,9 @@ int main(int argc, char const *argv[])
   printf("You have %d bugs at the imaginary rate of %f.\n",
             bugs, bug_rate);
 
-  long universe_of_defects = 1L * 1024L * 1024L * 1024L;
+  long universe_of_defects = LLONG_MAX + 12;
+  unsigned long u_of_d = LLONG_MAX + LLONG_MAX + 1;
+  printf("Unsigned %ld\n", u_of_d);
   printf("The entire universe has %ld bugs.\n", universe_of_defects);
 
   double expected_bugs = bugs * bug_rate;
