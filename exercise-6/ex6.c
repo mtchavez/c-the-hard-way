@@ -17,6 +17,10 @@ int main(int argc, char *argv[])
     printf("I have a last name %s.\n", last_name);
     printf("My whole name is %s %c. %s.\n",
             first_name, initial, last_name);
+    printf("\r\r%.2f\n\n%06.8f\n\n\t\t\t%6d\n", super_power, power, distance);
+
+    printf("%.3s...\n", first_name);
+    printf("%3.5s\n", last_name);
 
     return 0;
 }
