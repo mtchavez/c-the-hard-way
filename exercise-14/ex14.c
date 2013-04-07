@@ -1,30 +1,21 @@
-#include <stdio.h>
-#include <ctype.h>
+#include "ex14.h"
 
-
-int can_print_it(char c);
-void print_letters(char arg[]);
 
 void print_arguments(int argc, char *argv[]) {
-  for (int i = 0; i < argc; ++i)
-  {
-   print_letters(argv[i]);
+  for (int i = 0; i < argc; ++i) {
+    print_letters(argv[i], strlen(argv[i]));
   }
 }
 
-void print_letters(char arg[]) {
-  for (int i = 0; arg[i] != '\0'; ++i)
+void print_letters(char arg[], int length) {
+  for (int i = 0; i < length; ++i)
   {
     char ch = arg[i];
-    if (can_print_it(ch)) {
+    if (isalpha(ch) || isblank(ch)) {
       printf("'%c' == %d ", ch, ch);
     }
   }
   printf("\n");
-}
-
-int can_print_it(char c) {
-  return isalpha(c) || isblank(c);
 }
 
 int main(int argc, char *argv[])
