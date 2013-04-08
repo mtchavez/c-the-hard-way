@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+void print_all(int *cur_age, char **cur_name, int count) {
+  printf("---\n");
+  for(int i = 0; i < count; i++) {
+      printf("%s is %d years old again.\n",
+              cur_name[i], cur_age[i]);
+  }
+}
 
 int main(int argc, char const *argv[])
 {
@@ -43,5 +50,17 @@ int main(int argc, char const *argv[])
       printf("%s lived %d years so far.\n",
               *cur_name, *cur_age);
   }
+  printf("---\n");
+
+  // Print pointer addresses
+  for(cur_name = names, cur_age = ages;
+          (cur_age - ages) < count;
+          cur_name++, cur_age++)
+  {
+      printf("Name Addr: %p Age Addr: %p\n",
+              cur_name, cur_age);
+  }
+
+  print_all(ages, names, count);
   return 0;
 }
