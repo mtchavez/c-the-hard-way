@@ -12,6 +12,7 @@ struct Address {
     int set;
     char name[MAX_DATA];
     char email[MAX_DATA];
+    char city [MAX_DATA];
 };
 
 struct Database {
@@ -43,8 +44,8 @@ void die(const char *message, struct Connection *conn)
 
 void Address_print(struct Address *addr)
 {
-    printf("%d %s %s\n",
-            addr->id, addr->name, addr->email);
+    printf("%d %s %s %s\n",
+            addr->id, addr->name, addr->email, addr->city);
 }
 
 void Database_load(struct Connection *conn)
@@ -108,7 +109,7 @@ void Database_create(struct Connection *conn)
     }
 }
 
-void Database_set(struct Connection *conn, int id, const char *name, const char *email)
+void Database_set(struct Connection *conn, int id, const char *name, const char *email, const char *city)
 {
     struct Address *addr = &conn->db->rows[id];
     if(addr->set) die("Already set, delete it first", conn);
@@ -121,6 +122,9 @@ void Database_set(struct Connection *conn, int id, const char *name, const char 
 
     res = strncpy(addr->email, email, MAX_DATA);
     if(!res) die("Email copy failed", conn);
+
+    res = strncpy(addr->city, city, MAX_DATA);
+    if(!res) die("City copy failed", conn);
 }
 
 void Database_get(struct Connection *conn, int id)
@@ -179,9 +183,9 @@ int main(int argc, char *argv[])
             break;
 
         case 's':
-            if(argc != 6) die("Need id, name, email to set", conn);
+            if(argc != 7) die("Need id, name, email and city to set", conn);
 
-            Database_set(conn, id, argv[4], argv[5]);
+            Database_set(conn, id, argv[4], argv[5], argv[6]);
             Database_write(conn);
             break;
 
